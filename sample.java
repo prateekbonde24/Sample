@@ -181,14 +181,12 @@ public class GradebookResource {
 
 		if (grades.containsKey(gradeitem)) {
 			try {
-				System.out.println(grades.keySet());
 
 				Student s = new Student(studentid, marks, feedback);
 				HashMap<String, Student> temp = new HashMap<String, Student>(grades.get(gradeitem));
 				if (temp.containsKey(studentid)) {
 					temp.put(studentid, s);
 					grades.put(gradeitem, temp);
-					System.out.println(temp.get(studentid).getMarks());
 					URI locationURI = URI
 							.create(context.getAbsolutePath() + "/gradeitem/" + gradeitem + "/studentid/" + studentid);
 					Response res = Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON)
@@ -225,7 +223,6 @@ public class GradebookResource {
 		if (grades.containsKey(id)) {
 
 			grades.remove(id);
-			System.out.println(grades.keySet());
 			URI locationURI = URI.create(context.getAbsolutePath() + "/gradeitem/" + id);
 			Response res = Response.status(Response.Status.NO_CONTENT).type(MediaType.APPLICATION_JSON)
 					.location(locationURI).entity("Deleted").build();
